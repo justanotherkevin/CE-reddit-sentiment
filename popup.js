@@ -55,12 +55,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const loadingDiv = document.getElementById("loading");
 
   analyzeButton.addEventListener("click", function () {
-    console.log("Analyze button clicked");
     loadingDiv.style.display = "block";
     analyzeButton.disabled = true;
-    console.log(analyzeButton);
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      console.log("tabs", tabs);
       chrome.tabs.sendMessage(
         tabs[0].id,
         { action: "getComments" },
