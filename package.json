@@ -1,0 +1,24 @@
+{
+  "name": "reddit-comments-ana",
+  "version": "1.0.0",
+  "description": "Reddit comments analyzer with sentiment and key points extraction",
+  "main": "src/example.js",
+  "scripts": {
+    "start": "node src/example.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "natural": "^6.5.0",
+    "node-summarizer": "^1.0.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": ["src/**/*.js", "!src/example.js"]
+  }
+}
