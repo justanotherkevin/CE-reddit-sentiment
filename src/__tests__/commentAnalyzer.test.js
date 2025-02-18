@@ -93,13 +93,24 @@ describe("RedditCommentAnalyzer", () => {
   });
 
   describe("extractKeyPoints", () => {
-    it("should extract key points from text", async () => {
+    it("should return original text for short content", async () => {
+      const text = "This is a short comment. It has two sentences.";
+      const keyPoints = await analyzer.extractKeyPoints(text);
+      expect(keyPoints).toBe(text);
+    });
+
+    it("should extract key points from longer text", async () => {
       const text =
-        "This is a long comment with multiple sentences. It contains important information. And some extra details.";
+        "The new AI model has shown remarkable progress in natural language processing. " +
+        "Researchers found that it performs particularly well on complex reasoning tasks. " +
+        "The model uses a novel architecture that combines attention mechanisms with sparse coding. " +
+        "This breakthrough could lead to significant improvements in various AI applications. " +
+        "The team plans to release their findings in a peer-reviewed journal next month.";
       const keyPoints = await analyzer.extractKeyPoints(text);
 
       expect(keyPoints).toBeTruthy();
       expect(typeof keyPoints).toBe("string");
+      expect(keyPoints.length).toBeLessThan(text.length);
     });
 
     it("should handle short text appropriately", async () => {
