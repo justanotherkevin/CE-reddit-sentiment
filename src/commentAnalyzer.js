@@ -47,14 +47,21 @@ class RedditCommentAnalyzer {
 
   async extractKeyPoints(text) {
     try {
-      // If text is too short, return it as is
-      if (text.length < 100) {
+      // If text is too short or has too few sentences, return it as is
+      const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+      if (text.length < 200 || sentences.length < 3) {
         return text;
       }
 
-      const summarizer = new SummarizerManager();
-      const summary = await summarizer.summarize(text, 2); // Get 2 sentences
-      return summary;
+      const summarizer = new SummarizerManager(text, Math.min(2, sentences.len  gth));
+      try {
+        const summaryObj = await summarizer.getSummaryByRank();
+        return summaryObj.summary;
+      } catch (summaryError) {
+        // If summarization fails, try frequency-based approach as fallback
+        const freqSummary = summarizer.getSummaryByFrequency();
+        return freqSummary.summary;
+      }
     } catch (error) {
       console.error("Error extracting key points:", error);
       return text.slice(0, 150) + "..."; // Fallback to truncated text
