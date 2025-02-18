@@ -19,6 +19,9 @@
   "jest": {
     "testEnvironment": "node",
     "coverageDirectory": "coverage",
-    "collectCoverageFrom": ["src/**/*.js", "!src/example.js"]
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/example.js"
+    ]
   }
 }

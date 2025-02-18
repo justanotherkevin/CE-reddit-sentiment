@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["*://www.reddit.com/r/*/comments/*"],
-      "js": ["mocks/mockComments.js", "content.js", "helper/comments.js"]
+      "js": ["mocks/mockComments.js", "src/RedditParser.js", "helper/comments.js", "content.js"]
     }
   ]
 }
